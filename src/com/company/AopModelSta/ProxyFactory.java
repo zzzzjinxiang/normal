@@ -8,7 +8,6 @@ public class ProxyFactory {
     /**
      * 动态代理
      */
-
     private Object target;
     public ProxyFactory(Object target){
         this.target = target;
