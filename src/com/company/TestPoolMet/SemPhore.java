@@ -5,7 +5,7 @@ import java.util.concurrent.Semaphore;
 public class SemPhore {
     public static void main(String[] args){
         int N=8;
-        Semaphore semaphore = new Semaphore(3);
+        Semaphore semaphore = new Semaphore(1);
         for(int i=0;i<N;i++){
             new tools(i,semaphore).start();
         }
@@ -25,7 +25,7 @@ public class SemPhore {
                 System.out.println("ok-"+this.num);
                 Thread.sleep(2000);
                 System.out.println(this.num+"生产结束");
-                semaphore.release(2);
+                semaphore.release();
             } catch (InterruptedException e){
                 e.printStackTrace();
             }

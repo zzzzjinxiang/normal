@@ -5,7 +5,7 @@ import java.util.concurrent.CyclicBarrier;
 
 public class CycBar {
     public static void main(String[] args){
-        int N=4;
+        int N=1;
         CyclicBarrier barrier = new CyclicBarrier(N, new Runnable() {
             @Override
             public void run() {
