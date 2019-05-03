@@ -23,14 +23,13 @@ public class CntLatch {
         @Override
         public void run(){
             try{
-                System.out.println(i+Thread.currentThread().getName()+"正在运行");
+                System.out.println(Thread.currentThread().getName()+"正在运行"+i);
                 Thread.sleep(1000);
-                System.out.println(i+Thread.currentThread().getName()+"运行完毕");
-            } catch (InterruptedException e){
-                e.printStackTrace();
-            }finally {
+                System.out.println(Thread.currentThread().getName()+"运行完毕"+i);
                 if(latch!=null)
                     latch.countDown();
+            } catch (InterruptedException e){
+                e.printStackTrace();
             }
         }
     }
@@ -43,10 +42,10 @@ class Application{
     }
 
     public void StartApp(){
-        int poolSize = 2;
+        int poolSize = 4;
         int needThr = 4;
-        CountDownLatch latch = new CountDownLatch(4);
-        Executor executor = Executors.newFixedThreadPool(poolSize);
+        CountDownLatch latch = new CountDownLatch(2);
+        Executor executor = Executors.newFixedThreadPool(2);
 
         for(int i=0;i<needThr;i++){
             executor.execute(new CntLatch.tools(latch,i));
@@ -54,7 +53,7 @@ class Application{
 
         try{
             System.out.println("等待子线程执行完毕");
-            latch.await(3,SECONDS);
+            latch.await();
             System.out.println("子线程执行完毕，继续主线程");
         } catch (InterruptedException e){
             e.printStackTrace();
